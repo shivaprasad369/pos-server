@@ -7,11 +7,17 @@ import initializePassport from '../Config/passport-config.js'
 import authRouter from '../Routers/auth/auth.js';
 import morgan from 'morgan';
 import cors from 'cors';
-
+import bannerRoute from '../Routers/banner/banner.js';
+import path from 'path';
+import aboutRouter from '../Routers/about\'/about.js';
+import contactRoute from '../Routers/contact/contact-info.js';
+import socialRouter from '../Routers/contact/social.routes.js';
+import settingRouter from '../Routers/contact/setting.js';
+import serviceRoutes from '../Routers/services/service.routes.js';
 
 const app = express();
 const port = 8000;
-const prisma = new PrismaClient();
+
 
 app.use(morgan('dev'));
 // passport config
@@ -25,9 +31,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.json());
-app.use(cors("*"))
+app.use(cors({
+  origin: '*',
+}))
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 // routes
 app.use('/', authRouter);
+app.use('/banner',bannerRoute)
+app.use('/about',aboutRouter)
+app.use('/contact',contactRoute)
+app.use('/social',socialRouter)
+app.use('/contact-form-setting',settingRouter)
+app.use("/service", serviceRoutes);
 
 
 app.use((err, req, res, next) => {

@@ -1,18 +1,12 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
-  //output   = "../app/generated/prisma"
 
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
 model tbl_banner {
   id          Int      @id @default(autoincrement())
   name        String
@@ -20,6 +14,39 @@ model tbl_banner {
   description String
   image       String
   createdAt   DateTime @default(now())
+  experience String
 }
-
+model About {
+  id        Int      @id @default(autoincrement())
+  bio       String   @db.Text()
+  image     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Contact {
+  id        Int      @id @default(autoincrement())
+  email     String
+  phone     String
+  location  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model SocialMedia {
+  id        Int      @id @default(autoincrement())
+  github    String
+  linkedIn  String
+  twitter   String
+}
+model ContactFormSetting {
+  id              Int     @id @default(autoincrement())
+  email           String
+  successMessage  String
+  enableCaptcha   Boolean @default(false)
+}
+model Service {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String   @db.Text()
+  icon        String
+}
 
