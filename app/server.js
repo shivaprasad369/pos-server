@@ -1,19 +1,25 @@
-import { PrismaClient } from '@prisma/client'; // ✅ standard client
-
 import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
-import initializePassport from '../Config/passport-config.js'
-import authRouter from '../Routers/auth/auth.js';
 import morgan from 'morgan';
 import cors from 'cors';
-import bannerRoute from '../Routers/banner/banner.js';
 import path from 'path';
+
+import initializePassport from '../Config/passport-config.js'
+
+import authRouter from '../Routers/auth/auth.js';
+import bannerRoute from '../Routers/banner/banner.js';
 import aboutRouter from '../Routers/about\'/about.js';
 import contactRoute from '../Routers/contact/contact-info.js';
 import socialRouter from '../Routers/contact/social.routes.js';
 import settingRouter from '../Routers/contact/setting.js';
 import serviceRoutes from '../Routers/services/service.routes.js';
+import approachRoutes from '../Routers/approach/approach.routes.js';
+import skillRoutes from '../Routers/Skills/skill.routes.js';
+import categoryRoutes from '../Routers/Skills/category.routes.js';
+import UserRouter from '../Routers/contact/user.routes.js';
+import educationRouter from '../Routers/education/education.router.js';
+import experienceRouter from '../Routers/experience/experience.router.js';
 
 const app = express();
 const port = 8000;
@@ -43,8 +49,12 @@ app.use('/contact',contactRoute)
 app.use('/social',socialRouter)
 app.use('/contact-form-setting',settingRouter)
 app.use("/service", serviceRoutes);
-
-
+app.use('/approach', approachRoutes);
+app.use("/skills", skillRoutes)
+app.use("/categories", categoryRoutes)
+app.use('/user',UserRouter)
+app.use('/education',educationRouter);
+app.use('/experience',experienceRouter)
 app.use((err, req, res, next) => {
   // Check if error has a status code, if not default to 500
   const statusCode = err.statusCode || 500;

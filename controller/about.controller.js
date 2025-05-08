@@ -1,7 +1,7 @@
-import { PrismaClient } from "@prisma/client";
 import fs from "fs";
 import path from "path";
 
+import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const getAbout = async (req, res) => {

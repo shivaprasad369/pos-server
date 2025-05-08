@@ -49,4 +49,62 @@ model Service {
   description String   @db.Text()
   icon        String
 }
+model Approach {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String   @db.Text()
+  icon        String
+ 
+}
+model SkillsCategory {
+  id           Int     @id @default(autoincrement())
+  mainCategory String
+  slug         String  @unique
+  skills       Skill[]
+}
+
+model Skill {
+  id               Int            @id @default(autoincrement())
+  name             String
+  skillsCategoryId Int
+  category         SkillsCategory @relation(fields: [skillsCategoryId], references: [id], onDelete: Cascade)
+}
+model Contacts {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  subject   String
+  message   String     @db.Text()
+  reply     String?   // Optional
+  viewed    Boolean   @default(false)
+  createdAt DateTime  @default(now())
+}
+model Education {
+  id            Int      @id @default(autoincrement())
+  institution   String
+  degree        String
+  fieldOfStudy  String
+  location      String
+  startDate     DateTime
+  endDate       DateTime
+  description   String    @db.Text()
+  gpaOrPercent  String?   // Optional field
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+model Experience {
+  id              String   @id @default(uuid())
+  jobTitle        String
+  company         String
+  location        String
+  employmentType  String
+  startDate       DateTime
+  endDate         DateTime?
+  description     String    @db.Text()
+  responsibilities String   @db.Text()
+  technologies    String   // Comma-separated
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
 
