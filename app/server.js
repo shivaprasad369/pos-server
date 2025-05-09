@@ -20,6 +20,10 @@ import categoryRoutes from '../Routers/Skills/category.routes.js';
 import UserRouter from '../Routers/contact/user.routes.js';
 import educationRouter from '../Routers/education/education.router.js';
 import experienceRouter from '../Routers/experience/experience.router.js';
+import companyRouter from '../Routers/experience/company.router.js';
+import projectRouter from '../Routers/project/project.router.js';
+import blogRouter from '../Routers/blog/blog.router.js';
+import summeryRoute from '../Routers/dashboard/dash.router.js';
 
 const app = express();
 const port = 8000;
@@ -55,6 +59,11 @@ app.use("/categories", categoryRoutes)
 app.use('/user',UserRouter)
 app.use('/education',educationRouter);
 app.use('/experience',experienceRouter)
+app.use('/company',companyRouter)
+app.use('/project',projectRouter)
+app.use('/blog',blogRouter)
+app.use('/summery',summeryRoute)
+
 app.use((err, req, res, next) => {
   // Check if error has a status code, if not default to 500
   const statusCode = err.statusCode || 500;

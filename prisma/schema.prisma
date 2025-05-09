@@ -93,18 +93,62 @@ model Education {
   updatedAt     DateTime @updatedAt
 }
 model Experience {
-  id              String   @id @default(uuid())
-  jobTitle        String
-  company         String
-  location        String
-  employmentType  String
-  startDate       DateTime
-  endDate         DateTime?
-  description     String    @db.Text()
-  responsibilities String   @db.Text()
-  technologies    String   // Comma-separated
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id               String     @id @default(uuid())
+  jobTitle         String
+  company          String
+  location         String
+  employmentType   String
+  startDate        DateTime
+  endDate          DateTime?
+  description      String     @db.Text()
+  responsibilities String     @db.Text()
+  technologies     String     // Comma-separated
+  companies        Company[]
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
 }
 
+model Company {
+  id            Int        @id @default(autoincrement())
+  name          String
+  location      String
+  industry      String
+  site          String
+  description   String     @db.Text()
+  experienceId  String     // changed from Int to String
+  experience    Experience @relation(fields: [experienceId], references: [id])
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+model Project {
+  id           Int             @id @default(autoincrement())
+  title        String
+  summary      String
+  description  String
+  technologies String
+  github       String?
+  liveUrl      String?
+  date         DateTime
+  featured     Boolean         @default(false)
+  images       ProjectImage[]
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+}
+
+model ProjectImage {
+  id        Int      @id @default(autoincrement())
+  url       String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId Int
+}
+model Blog {
+  id             Int      @id @default(autoincrement()) // Primary key
+  title          String   // Title of the blog
+  summary        String   // Short summary of the blog
+  description    String   // Full description of the blog
+  image          String   // URL to the image
+  publicationDate DateTime // Date the blog is published
+  tags           String   // Comma separated tags, or you could define a relation if needed
+ 
+}
 

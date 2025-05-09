@@ -38,7 +38,7 @@ export const updateExperience = async (req, res) => {
     const { id } = req.params
     const data = req.body
     const experience = await prisma.experience.update({ where: { id }, data })
-    res.status(200).json(experience)
+    res.status(200).json("experience updated")
   } catch (error) {
     res.status(500).json({ error: "Failed to update experience" })
   }
