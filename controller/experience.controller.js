@@ -9,13 +9,24 @@ export const createExperience = async (req, res) => {
     res.status(201).json(experience)
   } catch (error) {
     res.status(500).json({ error: "Failed to create experience" })
-    console.log(error)
+  
   }
 }
 
 export const getAllExperiences = async (_req, res) => {
   try {
-    const experiences = await prisma.experience.findMany({ orderBy: { startDate: "desc" } })
+    const experiences = await prisma.experience.findMany({ 
+      include:{companies:{
+        select:{
+          id:true,
+          name:true,
+          site:true,
+          description:true
+        }
+      }}
+      ,orderBy: { startDate: "desc" },
+    
+    })
     res.status(200).json(experiences)
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch experiences" })
@@ -25,7 +36,16 @@ export const getAllExperiences = async (_req, res) => {
 export const getExperienceById = async (req, res) => {
   try {
     const { id } = req.params
-    const experience = await prisma.experience.findUnique({ where: { id } })
+    const experience = await prisma.experience.findUnique({include:{
+      companies:{
+        select:{
+          id:true,
+          name:true,
+          site:true,
+          description:true
+        }
+      }
+    }, where: { id } })
     if (!experience) return res.status(404).json({ error: "Not found" })
     res.status(200).json(experience)
   } catch (error) {

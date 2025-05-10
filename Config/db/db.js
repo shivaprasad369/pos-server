@@ -5,11 +5,14 @@ const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '', // your MySQL password
-  database: 'pocky' // make sure this DB exists
+  database: 'test' // make sure this DB exists
 });
 
 db.connect(err => {
-  if (err) throw err;
+  if (err) {
+    console.error('Error connecting to MySQL');
+    return;
+  };
   console.log('Connected to MySQL');
 });
 

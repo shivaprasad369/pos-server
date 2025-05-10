@@ -10,6 +10,7 @@ export const getExperience = async (req, res) => {
         select: {
           id: true,
           jobTitle: true,
+          
         },
       })
       

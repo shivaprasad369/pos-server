@@ -62,7 +62,7 @@ export const getServices = async (req, res) => {
     const services = await prisma.service.findMany();
     res.status(200).json(services);
   } catch (error) {
-    console.error("Get Services Error:", error);
+  
     res.status(500).json({ message: "Internal Server Error" });
   }
 };

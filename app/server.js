@@ -24,6 +24,7 @@ import companyRouter from '../Routers/experience/company.router.js';
 import projectRouter from '../Routers/project/project.router.js';
 import blogRouter from '../Routers/blog/blog.router.js';
 import summeryRoute from '../Routers/dashboard/dash.router.js';
+import verifyToken from '../middleware/authMiddleware.js';
 
 const app = express();
 const port = 8000;
@@ -62,7 +63,7 @@ app.use('/experience',experienceRouter)
 app.use('/company',companyRouter)
 app.use('/project',projectRouter)
 app.use('/blog',blogRouter)
-app.use('/summery',summeryRoute)
+app.use('/summery',verifyToken,summeryRoute)
 
 app.use((err, req, res, next) => {
   // Check if error has a status code, if not default to 500

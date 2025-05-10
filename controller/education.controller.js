@@ -9,7 +9,7 @@ export const createEducation = async (req, res) => {
     res.status(201).json(education)
   } catch (error) {
     res.status(500).json({ error: 'Failed to create education record',error })
-    console.log(error)
+ 
   }
 }
 
@@ -49,7 +49,7 @@ export const updateEducation = async (req, res) => {
     res.json(updated)
   } catch (error) {
     res.status(500).json({ error: 'Failed to update education record' })
-    console.log(error)
+
   }
 }
 

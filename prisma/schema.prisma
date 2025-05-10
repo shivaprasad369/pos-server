@@ -124,7 +124,7 @@ model Project {
   id           Int             @id @default(autoincrement())
   title        String
   summary      String
-  description  String
+  description  String          @db.Text()
   technologies String
   github       String?
   liveUrl      String?
@@ -145,10 +145,15 @@ model Blog {
   id             Int      @id @default(autoincrement()) // Primary key
   title          String   // Title of the blog
   summary        String   // Short summary of the blog
-  description    String   // Full description of the blog
+  description    String   @db.Text()
   image          String   // URL to the image
   publicationDate DateTime // Date the blog is published
   tags           String   // Comma separated tags, or you could define a relation if needed
  
 }
 
+model Admin{
+  id       Int      @id @default(autoincrement()) // Primary key
+  UserName String
+  password String
+}
