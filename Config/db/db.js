@@ -2,10 +2,10 @@
 //create db config
 import mysql from 'mysql2'
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '', // your MySQL password
-  database: 'test' // make sure this DB exists
+  host: 'sql12.freesqldatabase.com',
+  user: 'sql12778315',
+  password: 'yu3VhcPhiE', // your MySQL password
+  database: 'sql12778315' // make sure this DB exists
 });
 
 db.connect(err => {
