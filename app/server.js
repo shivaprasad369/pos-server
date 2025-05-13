@@ -42,9 +42,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.json());
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://shivaprasad-portfolio-two.vercel.app'
+];
+
 app.use(cors({
-  origin: '*',
-}))
+  origin: allowedOrigins,
+  credentials: true, // Only needed if using cookies/auth headers
+}));
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 // routes
 app.use('/', authRouter);
